@@ -1,14 +1,14 @@
 import React from 'react';
 import { BoutiqueInfo, MergedProduct, OrderItem } from '../types';
-import { Upload, Download, FileSpreadsheet, Code2, RefreshCw, Printer } from 'lucide-react';
-import { exportConsolidatedOrdersCSV, exportSellOutReportCSV } from '../utils/exportUtils';
+import { Upload, Download, FileSpreadsheet, RefreshCw, Printer, Cpu } from 'lucide-react';
+import { exportConsolidatedOrdersCSV, exportSellOutReportCSV, printReportToPdf } from '../utils/exportUtils';
 
 interface HeaderProps {
   boutiqueInfo: BoutiqueInfo;
   products: MergedProduct[];
   orders: OrderItem[];
   onOpenUpload: () => void;
-  onOpenScript: () => void;
+  onOpenConverter: () => void;
   onResetData: () => void;
   dataSourceLabel: string;
 }
@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
   products,
   orders,
   onOpenUpload,
-  onOpenScript,
+  onOpenConverter,
   onResetData,
   dataSourceLabel,
 }) => {
@@ -90,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           <button
-            onClick={() => window.print()}
+            onClick={() => printReportToPdf(products, boutiqueInfo)}
             className="inline-flex items-center gap-1.5 rounded border border-stone-300 bg-white px-3 py-1.5 text-xs font-medium text-stone-700 shadow-sm transition hover:bg-stone-50 hover:text-stone-900"
             title="Stampa o Salva Report in PDF con immagini"
           >
@@ -99,12 +99,12 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           <button
-            onClick={onOpenScript}
+            onClick={onOpenConverter}
             className="inline-flex items-center gap-1.5 rounded border border-stone-300 bg-white px-3 py-1.5 text-xs font-medium text-stone-700 shadow-sm transition hover:bg-stone-50 hover:text-stone-900"
-            title="View and download the Python consolidation code"
+            title="Convertitore Data Engineer (Python Script Pipeline)"
           >
-            <Code2 className="h-3.5 w-3.5 text-amber-700" />
-            <span>Python Script</span>
+            <Cpu className="h-3.5 w-3.5 text-amber-800" />
+            <span>Data Engineer Converter</span>
           </button>
 
           <button

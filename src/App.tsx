@@ -15,7 +15,7 @@ import { SizeMatrixView } from './components/SizeMatrixView';
 import { PoComparisonView } from './components/PoComparisonView';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { FileUploadModal } from './components/FileUploadModal';
-import { PythonScriptModal } from './components/PythonScriptModal';
+import { DataEngineerConverterModal } from './components/DataEngineerConverterModal';
 
 export default function App() {
   const [boutiqueInfo, setBoutiqueInfo] = useState<BoutiqueInfo>({
@@ -36,7 +36,7 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState<MergedProduct | null>(null);
 
   const [isUploadOpen, setIsUploadOpen] = useState(false);
-  const [isScriptOpen, setIsScriptOpen] = useState(false);
+  const [isConverterOpen, setIsConverterOpen] = useState(false);
 
   const [filters, setFilters] = useState<FilterState>({
     search: '',
@@ -179,7 +179,7 @@ export default function App() {
         products={filteredProducts}
         orders={orders}
         onOpenUpload={() => setIsUploadOpen(true)}
-        onOpenScript={() => setIsScriptOpen(true)}
+        onOpenConverter={() => setIsConverterOpen(true)}
         onResetData={handleResetData}
         dataSourceLabel={dataSourceLabel}
       />
@@ -298,10 +298,10 @@ export default function App() {
         onDataParsed={handleDataParsed}
       />
 
-      {/* Python Script & Streamlit Blueprint Modal */}
-      <PythonScriptModal
-        isOpen={isScriptOpen}
-        onClose={() => setIsScriptOpen(false)}
+      {/* Data Engineer Converter Modal */}
+      <DataEngineerConverterModal
+        isOpen={isConverterOpen}
+        onClose={() => setIsConverterOpen(false)}
       />
     </div>
   );
